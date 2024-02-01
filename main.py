@@ -44,7 +44,7 @@ def main():
             if len(website) != 0:
                 dictionary['Page ' + str(count)]['Website'] = website
 
-            phone_number_std, landline, phone_number = fetch_information.get_phone(text)
+            phone_number_std, landline, phone_number = fetch_information.get_phone_number(text)
             if len(phone_number_std) != 0:
                 dictionary['Page ' + str(count)]['Phone number STD'] = phone_number_std
             if len(landline) != 0:

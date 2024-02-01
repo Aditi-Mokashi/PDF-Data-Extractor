@@ -17,25 +17,13 @@ def get_email(text: str) -> list:
                             message='Error while fetching email: ' + str(e.args), level=1)
 
 
-def get_phone(text: str) -> list:
+def get_phone_number(text: str) -> list:
     try:
-        phone_number_std = []
-        landline = []
-        for number in re.findall(r'\+\d{12}', text):
-            if len(number) != 12:
-                continue
-            elif len(number) == 11:
-                landline.append(number)
-
-        for number in re.findall(r'\d{11}', text):
-            if len(number) != 11:
-                continue
-            else:
-                landline.append(number)
-
+        phone_number_with_std = re.findall(r'\+\d{12}', text)
+        landline = re.findall(r'\d{11}', text)
         phone_number = re.findall(r'\d{10}$', text)
 
-        return phone_number_std, phone_number_std, phone_number
+        return phone_number_with_std, landline, phone_number
     except Exception as e:
         logger.log_message(
                             message='Error while fetching phone number: ' + str(e.args), level=1)
