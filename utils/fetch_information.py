@@ -1,5 +1,4 @@
 from utils import logger, regex_utils
-from io_ops import write_to_json
 
 
 def fetch_information(url:str, pages: list, page_count: int) -> dict:
@@ -44,11 +43,28 @@ def fetch_information(url:str, pages: list, page_count: int) -> dict:
             if len(website) != 0:
                 info_dict[url]['Page ' + str(count)]['Website'] = website
 
-            phone_number_std, landline, phone_number = regex_utils.get_phone_number(text)
-            if len(phone_number_std) != 0:
-                info_dict[url]['Page ' + str(count)]['Phone number STD'] = phone_number_std
+            phone_number_with_std, landline, phone_number = regex_utils.get_phone_number(text)
+            if len(phone_number_with_std) != 0:
+                # for each fetched number store STD code and number seperately
+                phone_number_list = []
+                for number in phone_number_with_std:
+                    phone_number_list.append({
+                        "STD Code": number[:3],
+                        "Number": number[3:]
+                    })
+                info_dict[url]['Page ' + str(count)]['Phone numbers'] = phone_number_list
+            
             if len(landline) != 0:
-                info_dict[url]['Page ' + str(count)]['Landline'] = landline
+                # for each fetched number store STD code and number seperately
+                landline_list = []
+                for number in landline:
+                    landline_list.append({
+                        "STD Code": number[:3],
+                        "Number": number[3:]
+                    })
+                info_dict[url]['Page ' + str(count)]['Landline'] = landline_list
+                
+            
             if len(phone_number) != 0:
                 info_dict[url]['Page ' + str(count)]['Phone number'] = phone_number
             

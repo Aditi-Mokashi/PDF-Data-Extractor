@@ -4,10 +4,9 @@ from PyPDF2 import PdfReader
 from utils import download_pdf, logger, fetch_information
 from io_ops import read_config, write_to_json
 
+
 path = os.path.dirname(os.path.abspath('__file__'))
-
 urls, page_count = read_config.read_config()
-
 
 def main():
     """
@@ -25,7 +24,7 @@ def main():
                 os.remove(os.path.join(path,pdf_name))
             download_pdf.download_file(url, path)
 
-            # last element in the URL is the PDF name
+            # read pages and extract information
             reader = PdfReader(pdf_name)
             info_list.append(fetch_information.fetch_information(
                 url=url, pages=reader.pages, page_count=page_count))
