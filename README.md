@@ -30,8 +30,16 @@ This Python script is designed to download a file from a URL and to extract info
    ```bash
    cd PDF-Data-Extractor
    ```
-
-3. Install the required dependencies:
+3. Setup virtual environment:
+   ```bash
+   python -m venv venv
+   ```
+4. Activate virtual environment:
+   ```bash
+   source venv/Scripts/activate
+   ```
+   
+6. Install the required dependencies:
 
    ```bash
    pip install -r requirements.txt
