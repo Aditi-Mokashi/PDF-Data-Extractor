@@ -34,7 +34,7 @@ def main():
         write_to_json.write_to_json(info_list=info_list)
         elapsed_time = timeit.default_timer() - start_time
         logger.log_message(
-            message=f"Completed: Elapsed time: {elapsed_time}", level=0)
+            message=f"Elapsed time: {elapsed_time}", level=0)
 
     except Exception as e:
         logger.log_message(

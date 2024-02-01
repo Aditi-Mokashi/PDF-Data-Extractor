@@ -40,4 +40,4 @@ def download_file(url: str, dir: str) -> bool:
         driver.close()
     except Exception as e:
         logger.log_message(
-                            message='Exception while downloading file: ' + str(e.args), level=1)
+                            message='Error while downloading file: ' + str(e.args), level=1)
