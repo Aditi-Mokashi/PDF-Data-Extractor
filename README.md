@@ -1,4 +1,4 @@
-# News Web Scraper
+# PDF Data Extractor
 
 This Python script is designed to download a file from a URL and to extract information from PDF file using regex. The output/fetched information is saved in JSON format.
 
