@@ -1,15 +1,12 @@
 import os
 from PyPDF2 import PdfReader
-import json
 
 from utils import download_pdf, fetch_information, logger
+from io import read_config, write_to_json
 
 path = os.path.dirname(os.path.abspath('__file__'))
 
-with open("config.json", 'r') as f:
-    data = json.load(f)
-url = data['url']
-page_count = data['page_count']
+url, page_count = read_config.read_config()
 
 
 def main():
@@ -54,11 +51,8 @@ def main():
             
             count += 1
         
-        json_object = json.dumps(dictionary, indent=4)
-        with open("output.json",'w') as f:
-            f.write(json_object)
-        logger.log_message(
-                            message='Output saved to JSON file', level=0)
+        write_to_json.write_to_json(dictionary=dictionary)
+
     except Exception as e:
         logger.log_message(
                             message=str(e.args), level=1)

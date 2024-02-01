@@ -21,15 +21,11 @@ def download_file(url: str, dir: str) -> bool:
         driver.get(url)
         logger.log_message(
                             message='URL fetched successfully', level=0)
-        try:
-            WebDriverWait(driver, 1).until(EC.element_to_be_clickable(
-                (By.XPATH, r"/html/body/pdf-viewer/viewer-toolbar/div/div[3]/viewer-download-controls/cr-icon-button"))).click()
-            logger.log_message(
-                            message='File downladed successfully', level=0)
-        except Exception as e:
-            logger.log_message(
-                            message='File not downloaded: ' + str(e.args), level=1)
+        WebDriverWait(driver, 1).until(EC.element_to_be_clickable(
+            (By.XPATH, r"/html/body/pdf-viewer/viewer-toolbar/div/div[3]/viewer-download-controls/cr-icon-button"))).click()
+        logger.log_message(
+                        message='File downladed successfully', level=0)
         driver.close()
-        return True
-    except:
-        return False
+    except Exception as e:
+        logger.log_message(
+                            message='Error while downloading file: ' + str(e.args), level=1)
