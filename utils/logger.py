@@ -12,7 +12,7 @@ def log_message(message: str, level: int):
     Returns:
         pd.DataFrame: will later be converted into csv
     """
-        # Configuring basic logging settings
+    # Configuring basic logging settings
     logging.basicConfig(filename='logger.log',
             format="%(asctime)s - %(levelname)s - %(message)s",
             level=logging.INFO)

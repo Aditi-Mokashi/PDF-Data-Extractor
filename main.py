@@ -2,7 +2,7 @@ import os
 from PyPDF2 import PdfReader
 
 from utils import download_pdf, fetch_information, logger
-from io import read_config, write_to_json
+from io_ops import read_config, write_to_json
 
 path = os.path.dirname(os.path.abspath('__file__'))
 
@@ -10,6 +10,9 @@ url, page_count = read_config.read_config()
 
 
 def main():
+    """
+    Driver function
+    """
     try:
         dictionary = {}
         download_pdf.download_file(url, path)
