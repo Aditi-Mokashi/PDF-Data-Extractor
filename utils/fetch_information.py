@@ -2,7 +2,19 @@ from utils import logger, regex_utils
 from io_ops import write_to_json
 
 
-def fetch_information(url:str, pages: list, page_count: int):
+def fetch_information(url:str, pages: list, page_count: int) -> dict:
+    """
+    extracts information from each page
+
+    Args:
+        url (str): Link of the PDF
+        pages (list): pages in a PDF
+        page_count (int): number of pages to use
+
+    Returns:
+        dict: extracted information as key value pairs
+    """
+    
     try:
         # extract information for each page in PDF
         count = 1
