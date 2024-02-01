@@ -1,0 +1,7 @@
+venv/
+output.json
+*.log
+*.pdf
+*.csv
+*.ipynb_checkpoints/
+__pycache__/
