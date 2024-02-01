@@ -4,6 +4,7 @@ from utils import logger, regex_utils
 def fetch_information(url:str, pages: list, page_count: int) -> dict:
     """
     extracts information from each page
+    (CIN, PAN, Email, Website, Contact, Date)
 
     Args:
         url (str): Link of the PDF
@@ -20,8 +21,13 @@ def fetch_information(url:str, pages: list, page_count: int) -> dict:
         info_dict = {url: {}}
         for page in pages[0:page_count]:
             info_dict[url]['Page ' + str(count)] = {}
+            # replace newlines with spaces
             text = " ".join(page.extract_text().split('\n'))
 
+            # get Corporate Identification Number (CIN) and its count,
+            # Email, Permanent Identification Number (PAN), Date,
+            # Website, Contact Number and save it in a ditionary in format:
+            # url: {Page 1: {CIN: cin, Email: email}, {Page2: ...}}
             cin = regex_utils.get_cin(text)
             if len(cin) != 0:
                 info_dict[url]['Page ' + str(count)]['CIN_count'] = len(cin)
