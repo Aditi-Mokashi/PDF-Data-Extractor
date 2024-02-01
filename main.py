@@ -1,4 +1,5 @@
 import os
+import timeit
 from PyPDF2 import PdfReader
 
 from utils import download_pdf, logger, fetch_information
@@ -9,6 +10,7 @@ path = os.path.dirname(os.path.abspath('__file__'))
 urls, page_count = read_config.read_config()
 
 def main():
+    start_time = timeit.default_timer()
     """
     Driver function
     """
@@ -30,6 +32,9 @@ def main():
                 url=url, pages=reader.pages, page_count=page_count))
             
         write_to_json.write_to_json(info_list=info_list)
+        elapsed_time = timeit.default_timer() - start_time
+        logger.log_message(
+            message=f"Completed: Elapsed time: {elapsed_time}", level=0)
 
     except Exception as e:
         logger.log_message(
