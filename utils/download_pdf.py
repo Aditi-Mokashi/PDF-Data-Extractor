@@ -31,7 +31,8 @@ def download_file(url: str, dir: str) -> bool:
         logger.log_message(
                             message='URL fetched successfully', level=0)
         
-        # fetching download button to click
+        # fetching download button to click using XPATH
+        # waits till the element is clickable
         WebDriverWait(driver, 1).until(EC.element_to_be_clickable(
             (By.XPATH, r"/html/body/pdf-viewer/viewer-toolbar/div/div[3]/viewer-download-controls/cr-icon-button"))).click()
         logger.log_message(
