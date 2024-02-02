@@ -21,7 +21,7 @@ This Python script is designed to download a file from a URL and to extract info
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/NotShrirang/News-Web-Scraper.git
+   git clone https://github.com/Aditi-Mokashi/PDF-Data-Extractor.git
    ```
 
 2. Navigate to the project directory:
