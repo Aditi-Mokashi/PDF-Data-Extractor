@@ -13,15 +13,17 @@ def main():
     """
     try:
         start_time = timeit.default_timer()
-
+        
         # get data fetched from configuration file
         urls, page_count = read_config.read_config()
+
+        # multithreading to concurrently download PDFs
+        with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+            [executor.submit(download_pdf.download_file, url) for url in urls]
+
         # list to store dictionaries for each URL
         info_list = []
         for url in urls:
-            # multithreading to concurrently download PDFs
-            with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
-                futures = [executor.submit(download_pdf.download_file, url) for url in urls]
             
             # last element in URL is the PDF name
             pdf_name = url.split("/")[-1]
