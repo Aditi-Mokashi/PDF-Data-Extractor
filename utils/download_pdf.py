@@ -18,6 +18,7 @@ def download_file(url: str) -> bool:
     try:
         # get path of current directory
         dir = os.path.dirname(os.path.abspath('__file__'))
+        
         # last element of URL is the PDF name
         pdf_name = url.split("/")[-1]
 
