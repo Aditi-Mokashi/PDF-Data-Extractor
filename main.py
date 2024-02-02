@@ -16,7 +16,6 @@ def main():
 
         # get data fetched from configuration file
         urls, page_count = asyncio.run(read_config.read_config())
-        print(str(urls), page_count)
         # list to store dictionaries for each URL
         info_list = []
         for url in urls:
