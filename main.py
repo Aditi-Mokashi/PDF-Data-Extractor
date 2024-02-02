@@ -15,7 +15,7 @@ def main():
         start_time = timeit.default_timer()
 
         # get data fetched from configuration file
-        urls, page_count = asyncio.run(read_config.read_config())
+        urls, page_count = read_config.read_config()
         # list to store dictionaries for each URL
         info_list = []
         for url in urls:
