@@ -1,30 +1,31 @@
-import os
 import timeit
 from PyPDF2 import PdfReader
+import concurrent.futures
+import asyncio
 
 from utils import download_pdf, logger, fetch_information
 from io_ops import read_config, write_to_json
 
 
-path = os.path.dirname(os.path.abspath('__file__'))
-urls, page_count = read_config.read_config()
-
 def main():
-    start_time = timeit.default_timer()
     """
     Driver function
     """
     try:
+        start_time = timeit.default_timer()
+
+        # get data fetched from configuration file
+        urls, page_count = asyncio.run(read_config.read_config())
+        print(str(urls), page_count)
         # list to store dictionaries for each URL
         info_list = []
         for url in urls:
+            # multithreading to concurrently download PDFs
+            with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+                futures = [executor.submit(download_pdf.download_file, url) for url in urls]
+            
             # last element in URL is the PDF name
             pdf_name = url.split("/")[-1]
-
-            # if file already exists, remove it and download again
-            if os.path.exists(path=os.path.join(path, pdf_name)):
-                os.remove(os.path.join(path,pdf_name))
-            download_pdf.download_file(url, path)
 
             # read pages and extract information
             reader = PdfReader(pdf_name)

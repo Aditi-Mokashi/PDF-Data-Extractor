@@ -2,20 +2,29 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import os
 
 from utils import logger
 
 
-def download_file(url: str, dir: str) -> bool:
+def download_file(url: str) -> bool:
     """
     Download file from URL
 
     Args:
         url (str): Link to the file
-        dir (str): path of the destination directory
     """
 
     try:
+        # get path of current directory
+        dir = os.path.dirname(os.path.abspath('__file__'))
+        # last element of URL is the PDF name
+        pdf_name = url.split("/")[-1]
+
+        # if file already exists, remove it and download again
+        if os.path.exists(path=os.path.join(dir, pdf_name)):
+            os.remove(os.path.join(dir, pdf_name))
+        
         chrome_options = webdriver.ChromeOptions()
 
         # preferences required to download file
