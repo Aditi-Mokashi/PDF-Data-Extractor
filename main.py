@@ -1,7 +1,7 @@
 import timeit
 from PyPDF2 import PdfReader
 import concurrent.futures
-import asyncio
+import sys
 
 from utils import download_pdf, logger, fetch_information
 from io_helper import read_config, write_to_json
@@ -13,13 +13,17 @@ def main():
     """
     try:
         start_time = timeit.default_timer()
-        
+
         # get data fetched from configuration file
         urls, page_count = read_config.read_config()
 
-        # multithreading to concurrently download PDFs
-        with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
-            [executor.submit(download_pdf.download_file, url) for url in urls]
+        if len(sys.argv) == 2 and sys.argv[1] == 'multithreading':
+            # multithreading to concurrently download PDFs
+            with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+                [executor.submit(download_pdf.download_file, url) for url in urls]
+        else:
+            for url in urls:
+                download_pdf.download_file(url=url)
 
         # list to store dictionaries for each URL
         info_list = []
