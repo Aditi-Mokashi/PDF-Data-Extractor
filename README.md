@@ -8,7 +8,6 @@ This Python script is designed to download a file from a URL and to extract info
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
-- [License](#license)
 
 ## Prerequisites
 

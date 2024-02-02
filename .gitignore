@@ -3,6 +3,5 @@ output.json
 *.crdownload
 *.log
 *.pdf
-*.csv
 *.ipynb_checkpoints/
 __pycache__/
