@@ -3,16 +3,21 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import os
+from PyPDF2 import PdfReader
 
 from utils import logger
 
 
-def download_file(url: str) -> bool:
+def download_file(url: str) -> int:
     """
     Download file from URL
 
     Args:
-        url (str): Link to the file
+        url (str): link to the pdf file
+        page_count (int): number of pages to read
+    
+    Returns:
+        list: list of pages extracted
     """
 
     try:
