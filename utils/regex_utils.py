@@ -1,5 +1,5 @@
 import re
-from utils import logger
+from utils import logger, date_utils
 
 def get_cin(text: str) -> list:
     """
@@ -115,7 +115,9 @@ def get_date(text: str) -> str:
 
     try:
         pattern = r'\d{2}[/]\d{2}[/]\d{4}'
-        return re.findall(pattern=pattern, string=text)
+        date_list = date_utils.validate_date(re.findall(pattern=pattern, string=text))
+
+        return date_list
     except Exception as e:
         logger.log_message(
                             message='Error while fetching date: ' + str(e.args), level=1)
