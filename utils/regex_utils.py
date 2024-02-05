@@ -116,7 +116,7 @@ def get_date(text: str) -> str:
     try:
         pattern = r'\d{2}[/]\d{2}[/]\d{4}'
         date_list = date_utils.validate_date(re.findall(pattern=pattern, string=text))
-
+        print(date_list)
         return date_list
     except Exception as e:
         logger.log_message(
